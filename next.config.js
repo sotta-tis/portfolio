@@ -5,8 +5,8 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH,
   },
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "/portfolio",
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH ? "" : "/portfolio/",
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "/portfolio",
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH !== undefined ? "" : "/portfolio/",
 };
 
 module.exports = nextConfig;
