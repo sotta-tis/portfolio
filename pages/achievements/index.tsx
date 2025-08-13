@@ -53,6 +53,24 @@ const iconByName: Record<string, any> = {
   laravel: SiLaravel,
   "c++": SiCplusplus,
 };
+const brandColorByName: Record<string, string> = {
+  html: "#E34F26",
+  css: "#1572B6",
+  javascript: "#F7DF1E",
+  javascipt: "#F7DF1E",
+  typescript: "#3178C6",
+  react: "#61DAFB",
+  php: "#777BB4",
+  laravel: "#FF2D20",
+  docker: "#2496ED",
+  "c++": "#00599C",
+  python: "#3776AB",
+  tensorflow: "#FF6F00",
+  raspberrypi: "#A22846",
+  arduino: "#00979D",
+  swift: "#FA7343",
+  dart: "#0175C2",
+};
 
 const Home: React.FC = () => {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
@@ -257,7 +275,7 @@ const Home: React.FC = () => {
                     alignItems="center"
                     justifyContent="center"
                   >
-                    <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                  <Box fontSize={{ base: "2.5rem", md: "3rem" }} color={brandColorByName[name] ?? "black"}>
                       <IconComp />
                     </Box>
                   </Flex>
@@ -333,7 +351,7 @@ const Home: React.FC = () => {
                     alignItems="center"
                     justifyContent="center"
                   >
-                    <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                  <Box fontSize={{ base: "2.5rem", md: "3rem" }} color={brandColorByName[name] ?? "black"}>
                       <IconComp />
                     </Box>
                   </Flex>
@@ -497,7 +515,7 @@ const Home: React.FC = () => {
                     alignItems="center"
                     justifyContent="center"
                   >
-                    <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                  <Box fontSize={{ base: "2.5rem", md: "3rem" }} color={brandColorByName[name] ?? "black"}>
                       <IconComp />
                     </Box>
                   </Flex>
