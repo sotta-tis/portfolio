@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
+    "dev:local": "NEXT_PUBLIC_BASE_PATH=\"\" next dev",
     "build": "next build",
     "deploy": "next build && gh-pages -d out"
   },
