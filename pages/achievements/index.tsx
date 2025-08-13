@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Image, Button, Link } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, Link, Icon } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { useRouter } from "next/router";
 
@@ -21,6 +21,38 @@ const basic = [
   "react",
 ];
 const logos = ["html", "javascipt", "php", "laravel", "typescript", "react"];
+const emgTechs = ["python", "tensorflow", "raspberrypi", "arduino", "swift", "dart"];
+import {
+  SiPython,
+  SiTensorflow,
+  SiRaspberrypi,
+  SiArduino,
+  SiSwift,
+  SiDart,
+  SiHtml5,
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiPhp,
+  SiLaravel,
+  SiCplusplus,
+} from "react-icons/si";
+const iconByName: Record<string, any> = {
+  python: SiPython,
+  tensorflow: SiTensorflow,
+  raspberrypi: SiRaspberrypi,
+  arduino: SiArduino,
+  swift: SiSwift,
+  dart: SiDart,
+  html: SiHtml5,
+  javascipt: SiJavascript,
+  javascript: SiJavascript,
+  typescript: SiTypescript,
+  react: SiReact,
+  php: SiPhp,
+  laravel: SiLaravel,
+  "c++": SiCplusplus,
+};
 
 const Home: React.FC = () => {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
@@ -210,25 +242,27 @@ const Home: React.FC = () => {
               justifyContent="center"
               gap={4}
             >
-              {trust.map((src, index) => (
-                <Flex
-                  key={index}
-                  w={{ base: "30%", md: "35%" }}
-                  h="auto"
-                  overflow="hidden"
-                  borderRadius="10px"
-                  boxShadow="md"
-                  bg="white"
-                >
-                  <Image
-                    src={`${basePath}/${src}.png`}
-                    alt={`Image ${index + 1}`}
-                    objectFit="cover"
-                    w="100%"
-                    h="100%"
-                  />
-                </Flex>
-              ))}
+              {trust.map((name, index) => {
+                const IconComp = iconByName[name];
+                if (!IconComp) return null;
+                return (
+                  <Flex
+                    key={index}
+                    w={{ base: "30%", md: "35%" }}
+                    h={{ base: "80px", md: "100px" }}
+                    overflow="hidden"
+                    borderRadius="10px"
+                    boxShadow="md"
+                    bg="white"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                      <IconComp />
+                    </Box>
+                  </Flex>
+                );
+              })}
             </Flex>
           </Box>
         </Box>
@@ -268,7 +302,7 @@ const Home: React.FC = () => {
           >
             <Box w={{ md: "45%" }} m="10">
               <Text color="black" fontSize="2xl">
-                期間：約1年(継続中)
+                期間：約1年半(継続中)
               </Text>
               <Text color="black" fontSize="2xl">
                 約10名規模のエンジニアチーム
@@ -284,25 +318,27 @@ const Home: React.FC = () => {
               justifyContent="center"
               gap={4}
             >
-              {logos.map((src, index) => (
-                <Flex
-                  key={index}
-                  w={{ base: "30%", md: "35%" }}
-                  h="auto"
-                  overflow="hidden"
-                  borderRadius="10px"
-                  boxShadow="md"
-                  bg="white"
-                >
-                  <Image
-                    src={`${basePath}/${src}.png`}
-                    alt={`Image ${index + 1}`}
-                    objectFit="cover"
-                    w="100%"
-                    h="100%"
-                  />
-                </Flex>
-              ))}
+              {logos.map((name, index) => {
+                const IconComp = iconByName[name];
+                if (!IconComp) return null;
+                return (
+                  <Flex
+                    key={index}
+                    w={{ base: "30%", md: "35%" }}
+                    h={{ base: "80px", md: "100px" }}
+                    overflow="hidden"
+                    borderRadius="10px"
+                    boxShadow="md"
+                    bg="white"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                      <IconComp />
+                    </Box>
+                  </Flex>
+                );
+              })}
             </Flex>
           </Box>
         </Box>
@@ -446,26 +482,104 @@ const Home: React.FC = () => {
               justifyContent="center"
               gap={4}
             >
-              {basic.map((src, index) => (
+              {basic.map((name, index) => {
+                const IconComp = iconByName[name];
+                if (!IconComp) return null;
+                return (
+                  <Flex
+                    key={index}
+                    w={{ base: "30%", md: "35%" }}
+                    h={{ base: "80px", md: "100px" }}
+                    overflow="hidden"
+                    borderRadius="10px"
+                    boxShadow="md"
+                    bg="white"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                      <IconComp />
+                    </Box>
+                  </Flex>
+                );
+              })}
+            </Flex>
+          </Box>
+        </Box>
+        {/* 高専5年 研究 */}
+        <Box
+          bg="rgba(255, 240, 220, 1)"
+          margin={{ md: "10", base: "3" }}
+          justifyContent="center"
+          w={{ base: "auto", md: "80%" }}
+          borderRadius="20px"
+        >
+          <Box justifyContent="center" direction="column">
+            <Text
+              mt="3"
+              textAlign="center"
+              fontSize="4xl"
+              fontWeight="bold"
+              color="black"
+            >
+              オンデバイス学習によるHIアプリケーション(高専5年)
+            </Text>
+          </Box>
+          <Box
+            mt="5"
+            mb="5"
+            display="flex"
+            flexDirection={{ base: "column", md: "row" }}
+            justifyContent={{
+              base: "center",
+              md: "sapce-between",
+            }}
+            alignItems={{
+              base: "center",
+              md: "sapce-betweenpace-around",
+            }}
+          >
+          <Box w={{ base: "90%", md: "45%" }} m="10">
+              <Text color="black" fontSize="2xl">期間：開発中</Text>
+              <Text color="black" fontSize="lg">
+                自作したEMGセンサーデバイスから取得した筋電位データを用いて、
+                ニューラルネットワークで学習し、ヒューマンインタフェース（HI）
+                アプリケーションとして動作するネイティブアプリをFlutterで開発。
+              </Text>
+              <Text color="black" fontSize="lg" mt="2">
+                オンデバイス学習により個人差の大きいEMG信号の特性を克服するため、
+                端末上でパーソナライズ（個別再学習）を実施する仕組みを開発中。
+              </Text>
+            </Box>
+          <Flex
+            wrap="wrap"
+            w={{ md: "30%" }}
+            p={4}
+            justifyContent="center"
+            gap={4}
+          >
+            {emgTechs.map((name, index) => {
+              const IconComp = iconByName[name];
+              if (!IconComp) return null;
+              return (
                 <Flex
                   key={index}
                   w={{ base: "30%", md: "35%" }}
-                  h="auto"
+                  h={{ base: "80px", md: "100px" }}
                   overflow="hidden"
                   borderRadius="10px"
                   boxShadow="md"
                   bg="white"
+                  alignItems="center"
+                  justifyContent="center"
                 >
-                  <Image
-                    src={`${basePath}/${src}.png`}
-                    alt={`Image ${index + 1}`}
-                    objectFit="cover"
-                    w="100%"
-                    h="100%"
-                  />
+                <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                  <IconComp />
+                </Box>
                 </Flex>
-              ))}
-            </Flex>
+              );
+            })}
+          </Flex>
           </Box>
         </Box>
       </Flex>

@@ -1,6 +1,19 @@
-import { Box, Flex, Text, Image, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, Icon } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { useRouter } from "next/router";
+import {
+  SiCss3,
+  SiHtml5,
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiPhp,
+  SiLaravel,
+  SiDocker,
+  SiCplusplus,
+  SiTensorflow,
+  SiPython,
+} from "react-icons/si";
 
 // 回転アニメーションを定義
 const rotate = keyframes`
@@ -13,7 +26,6 @@ const rotate = keyframes`
 `;
 
 const Home: React.FC = () => {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
   const router = useRouter();
 
   const skills = [
@@ -40,6 +52,21 @@ const Home: React.FC = () => {
     "tensorflow",
     "python",
   ];
+
+  const iconByName: Record<string, any> = {
+    css: SiCss3,
+    html: SiHtml5,
+    javascipt: SiJavascript,
+    javascript: SiJavascript,
+    typescript: SiTypescript,
+    react: SiReact,
+    php: SiPhp,
+    laravel: SiLaravel,
+    docker: SiDocker,
+    "c++": SiCplusplus,
+    tensorflow: SiTensorflow,
+    python: SiPython,
+  };
   return (
     <Flex direction="column" w="100%" h="auto">
       {/* about me */}
@@ -75,25 +102,27 @@ const Home: React.FC = () => {
           ))}
         </Flex>
         <Flex wrap="wrap" w="100%" p={4} justifyContent="center" gap={4}>
-          {logos.map((src, index) => (
-            <Flex
-              key={index}
-              w={{ base: "30%", md: "20%" }}
-              h="auto"
-              overflow="hidden"
-              borderRadius="10px"
-              boxShadow="md"
-              bg="white"
-            >
-              <Image
-                src={`${basePath}/${src}.png`}
-                alt={`Image ${index + 1}`}
-                objectFit="cover"
-                w="100%"
-                h="100%"
-              />
-            </Flex>
-          ))}
+          {logos.map((name, index) => {
+            const IconComp = iconByName[name];
+            if (!IconComp) return null;
+            return (
+              <Flex
+                key={index}
+                w={{ base: "30%", md: "20%" }}
+                h={{ base: "80px", md: "100px" }}
+                overflow="hidden"
+                borderRadius="10px"
+                boxShadow="md"
+                bg="white"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
+                  <IconComp />
+                </Box>
+              </Flex>
+            );
+          })}
         </Flex>
       </Flex>
 
