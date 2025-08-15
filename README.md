@@ -1,3 +1,5 @@
+https://sotta-tis.github.io/portfolio/
+
 ## リポジトリ概要
 
 next 環境で静的ページを作成して github pages にあげる。
