@@ -1,83 +1,315 @@
-import { Box, Flex, Text, Button, Link, Icon } from "@chakra-ui/react";
-import { keyframes } from "@emotion/react";
+import { Box, Flex, Text, Button, Link } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
-// 回転アニメーションを定義
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-const trust = ["html", "javascipt", "typescript", "react"];
-const basic = [
-  "c++",
-  "python",
-  "tensorflow",
-  "raspberrypi",
-  "typescript",
-  "react",
-];
-const logos = ["html", "javascipt", "php", "laravel", "typescript", "react"];
-const emgTechs = ["python", "tensorflow", "raspberrypi", "arduino", "swift", "dart"];
-import {
-  SiPython,
-  SiTensorflow,
-  SiRaspberrypi,
-  SiArduino,
-  SiSwift,
-  SiDart,
-  SiHtml5,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiPhp,
-  SiLaravel,
-  SiCplusplus,
-} from "react-icons/si";
-const iconByName: Record<string, any> = {
-  python: SiPython,
-  tensorflow: SiTensorflow,
-  raspberrypi: SiRaspberrypi,
-  arduino: SiArduino,
-  swift: SiSwift,
-  dart: SiDart,
-  html: SiHtml5,
-  javascipt: SiJavascript,
-  javascript: SiJavascript,
-  typescript: SiTypescript,
-  react: SiReact,
-  php: SiPhp,
-  laravel: SiLaravel,
-  "c++": SiCplusplus,
-};
-const brandColorByName: Record<string, string> = {
-  html: "#E34F26",
-  css: "#1572B6",
-  javascript: "#F7DF1E",
-  javascipt: "#F7DF1E",
-  typescript: "#3178C6",
-  react: "#61DAFB",
-  php: "#777BB4",
-  laravel: "#FF2D20",
-  docker: "#2496ED",
-  "c++": "#00599C",
-  python: "#3776AB",
-  tensorflow: "#FF6F00",
-  raspberrypi: "#A22846",
-  arduino: "#00979D",
-  swift: "#FA7343",
-  dart: "#0175C2",
-};
-
 const Home: React.FC = () => {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
   const router = useRouter();
+
+  const ProjectSection = ({
+    title,
+    period,
+    role,
+    overview,
+    devEnv,
+    roleAndScale,
+    responsibilities,
+    bgColor,
+    detailLink,
+  }: {
+    title: string;
+    period: string;
+    role: string;
+    overview: string;
+    devEnv: {
+      os?: string;
+      language?: string;
+      fw?: string;
+      db?: string;
+    };
+    roleAndScale: {
+      role: string;
+      scale: string;
+    };
+    responsibilities: string[];
+    bgColor: string;
+    detailLink?: string;
+  }) => {
+    return (
+      <Flex
+        position="relative"
+        direction="column"
+        bg={bgColor}
+        color="navy.900"
+        alignItems="center"
+        justifyContent="center"
+        zIndex={1}
+        overflow="hidden"
+        py={{ base: "10", md: "10" }}
+      >
+        <Box
+          bg="rgba(255, 240, 220, 1)"
+          margin={{ md: "10", base: "3" }}
+          justifyContent="center"
+          w={{ base: "auto", md: "80%" }}
+          borderRadius="20px"
+          p={{ base: "5", md: "8" }}
+        >
+          <Box>
+            <Text
+              fontSize="3xl"
+              fontWeight="bold"
+              color="black"
+              mb="2"
+            >
+              {title}
+            </Text>
+            <Text fontSize="lg" color="black" mb="1">
+              <strong>期間：</strong>{period}
+            </Text>
+            <Text fontSize="lg" color="black" mb="4">
+              <strong>職種：</strong>{role}
+            </Text>
+
+            <Text fontSize="xl" fontWeight="bold" color="black" mb="2" mt="4">
+              概要
+            </Text>
+            <Text fontSize="md" color="black" mb="4" whiteSpace="pre-line">
+              {overview}
+            </Text>
+
+            <Text fontSize="xl" fontWeight="bold" color="black" mb="2" mt="4">
+              開発環境
+            </Text>
+            <Box mb="4">
+              {devEnv.os && (
+                <Text fontSize="md" color="black">
+                  <strong>OS：</strong>{devEnv.os}
+                </Text>
+              )}
+              {devEnv.language && (
+                <Text fontSize="md" color="black">
+                  <strong>言語：</strong>{devEnv.language}
+                </Text>
+              )}
+              {devEnv.fw && (
+                <Text fontSize="md" color="black">
+                  <strong>FW：</strong>{devEnv.fw}
+                </Text>
+              )}
+              {devEnv.db && (
+                <Text fontSize="md" color="black">
+                  <strong>DB：</strong>{devEnv.db}
+                </Text>
+              )}
+            </Box>
+
+            <Text fontSize="xl" fontWeight="bold" color="black" mb="2" mt="4">
+              役割・規模
+            </Text>
+            <Box mb="4">
+              <Text fontSize="md" color="black">
+                <strong>役割：</strong>{roleAndScale.role}
+              </Text>
+              <Text fontSize="md" color="black">
+                <strong>規模：</strong>{roleAndScale.scale}
+              </Text>
+            </Box>
+
+            <Text fontSize="xl" fontWeight="bold" color="black" mb="2" mt="4">
+              担当業務
+            </Text>
+            <Box as="ul" pl="5" mb="4">
+              {responsibilities.map((resp, index) => (
+                <Text key={index} as="li" fontSize="md" color="black" mb="1">
+                  {resp}
+                </Text>
+              ))}
+            </Box>
+            {detailLink && (
+              <Box mt="4" display="flex" justifyContent="center">
+                <Link
+                  href={detailLink}
+                  _hover={{ textDecoration: "none", transform: "scale(1.1)" }}
+                >
+                  <Box
+                    w="10rem"
+                    h="10rem"
+                    bg="rgba(10, 25, 47, 0.9)"
+                    color="white"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    borderRadius="10px"
+                    boxShadow="md"
+                    _hover={{ bg: "rgba(30, 45, 67, 0.9)", boxShadow: "lg" }}
+                  >
+                    <Text p="3" fontSize="3xl" fontWeight="bold">
+                      More Detail
+                    </Text>
+                  </Box>
+                </Link>
+              </Box>
+            )}
+          </Box>
+        </Box>
+      </Flex>
+    );
+  };
+
   return (
-    <Flex direction="column" w="100%" h="auto">
-      {/* 受賞歴 */}
+    <Flex direction="column" w="100%" h="auto" bg="rgba(10, 25, 47, 0.9)">
+      {/* タイトル */}
+      <Box
+        py={{ base: "8", md: "10" }}
+        textAlign="center"
+        bg="rgba(10, 25, 47, 0.9)"
+      >
+        <Text
+          fontSize={{ base: "3xl", md: "4xl" }}
+          fontWeight="bold"
+          color="white"
+          mb="2"
+        >
+        開発経験
+        </Text>
+      </Box>
+
+      {/* 高専プロコン2022 */}
+      <ProjectSection
+        title="高専プロコン2022 競技用ソルバーアプリケーション"
+        period="2022年3月 ～ 2022年12月"
+        role="ソフトウェアエンジニア"
+        overview="高専プロコン2022競技部門向けソルバーアプリケーションを開発。
+C++による高速音声波形解析、マルチスレッド処理、SIMD最適化を実装。
+最優秀賞（文部科学大臣賞）を受賞。"
+        devEnv={{
+          os: "Windows, Linux",
+          language: "C++",
+          fw: "OpenSiv3D",
+        }}
+        roleAndScale={{
+          role: "ソフトウェアエンジニア",
+          scale: "3名",
+        }}
+        responsibilities={[
+          "アルゴリズム設計",
+          "高速化（マルチスレッド・SIMD最適化）",
+          "GUI実装",
+          "サーバー連携（HTTP通信）",
+        ]}
+        bgColor="rgba(10, 25, 47, 0.9)"
+        detailLink="https://www.ct.omu.ac.jp/info/news/entry-16997.html"
+      />
+
+      {/* IoTロボット制御システム */}
+      <ProjectSection
+        title="IoTロボット制御システム"
+        period="2022年4月 ～ 2022年12月"
+        role="エンジニア"
+        overview="Dobotロボットアームおよびグリッパー制御を行うIoTシステムを開発。
+画像認識による物体検出、Next.js管理画面、Drogon Frameworkによるバックエンドを構築。"
+        devEnv={{
+          os: "Windows, macOS",
+          language: "TypeScript, C++, Python",
+          fw: "Next.js, React, Drogon Framework, Flask",
+          db: "PostgreSQL",
+        }}
+        roleAndScale={{
+          role: "フルスタックエンジニア",
+          scale: "3〜5名",
+        }}
+        responsibilities={[
+          "システム設計",
+          "フロントエンド実装",
+          "バックエンド実装",
+          "ロボット制御実装",
+        ]}
+        bgColor="yellow.300"
+      />
+
+      {/* 公開集客用Webサイト／社内管理システム */}
+      <ProjectSection
+        title="公開集客用Webサイト／社内管理システム"
+        period="2023年1月 ～ 現在"
+        role="フルスタックエンジニア"
+        overview="公開集客用Webサイトおよび社内管理システムの開発を担当。
+物件情報管理を中心としたCRUD機能を実装。
+React（App Router）とLaravel（GraphQL）を用いたフルスタック開発を実施し、
+既存WordPressサイトからの移行にも対応。"
+        devEnv={{
+          os: "Linux",
+          language: "TypeScript, PHP",
+          fw: "React, Laravel, Next.js",
+          db: "MySQL, PostgreSQL",
+        }}
+        roleAndScale={{
+          role: "フルスタックエンジニア",
+          scale: "5〜10名",
+        }}
+        responsibilities={[
+          "要件定義・設計",
+          "フロントエンド実装",
+          "バックエンドAPI実装",
+          "DB設計",
+        ]}
+        bgColor="orange.400"
+      />
+
+      {/* EMG Mobile Analyzer */}
+      <ProjectSection
+        title="EMG Mobile Analyzer（表面筋電位解析システム）"
+        period="2024年1月 ～ 2024年6月"
+        role="フルスタックエンジニア"
+        overview="表面筋電位（EMG）を用いた解析・推論・学習を行うモバイルアプリケーションを開発。
+Flutterによるモバイルアプリ、C++ネイティブエンジンによる高速特徴抽出、
+Core MLを用いたiOS端末上でのon-device学習を実装。
+BLE経由でMyoWareセンサーから1kHzサンプリングデータを取得するハードウェアも併せて開発。"
+        devEnv={{
+          os: "iOS",
+          language: "Dart, Swift, C++, Python",
+          fw: "Flutter, Core ML",
+          db: "SQLite",
+        }}
+        roleAndScale={{
+          role: "フルスタックエンジニア",
+          scale: "1名",
+        }}
+        responsibilities={[
+          "システム設計",
+          "モバイルアプリ実装",
+          "機械学習モデル設計・実装",
+          "on-device学習実装",
+          "組み込み（BLEデバイス）開発",
+        ]}
+        bgColor="orange.600"
+      />
+
+      {/* toC向けフリマ形式サービス */}
+      <ProjectSection
+        title="toC向けフリマ形式サービス（買取機能追加）"
+        period="2024年8月 ～ 2024年9月"
+        role="フルスタックエンジニア"
+        overview="既存toC向けフリマ形式サービスにおける買取機能の追加開発を担当。
+React Native（Expo）によるモバイルフロントエンドおよび
+NestJS（GraphQL）によるバックエンドAPIを実装。"
+        devEnv={{
+          os: "iOS, Android",
+          language: "TypeScript",
+          fw: "React Native, Expo, Next.js",
+          db: "PostgreSQL, Google BigQuery",
+        }}
+        roleAndScale={{
+          role: "フルスタックエンジニア",
+          scale: "10〜20名",
+        }}
+        responsibilities={[
+          "モバイルアプリ実装",
+          "バックエンドAPI実装",
+          "DB設計",
+        ]}
+        bgColor="orange.500"
+      />
+
+      {/* 個人研究開発｜フルスタックエンジニア */}
       <Flex
         position="relative"
         direction="column"
@@ -87,520 +319,65 @@ const Home: React.FC = () => {
         justifyContent="center"
         zIndex={1}
         overflow="hidden"
+        py={{ base: "10", md: "10" }}
       >
-        {/* タイトル */}
-        <Box justifyContent="center" direction="column">
-          <Text
-            mt="5"
-            textAlign="center"
-            fontSize="4xl"
-            fontWeight="bold"
-            color="white"
-          >
-            Awards
-          </Text>
-          <Text
-            textAlign="center"
-            fontSize="md"
-            fontWeight="bold"
-            color="white"
-          >
-            - 受賞歴 ー
-          </Text>
-        </Box>
         <Box
           bg="rgba(255, 240, 220, 1)"
           margin={{ md: "10", base: "3" }}
-          mt={{ base: "10" }}
-          mb={{ base: "10" }}
           justifyContent="center"
           w={{ base: "auto", md: "80%" }}
           borderRadius="20px"
+          p={{ base: "5", md: "8" }}
         >
-          <Box justifyContent="center" direction="column">
+          <Box>
             <Text
-              textAlign="center"
-              fontSize="4xl"
+              fontSize="3xl"
               fontWeight="bold"
               color="black"
+              mb="2"
             >
-              第33回高専プロコン競技部門 優勝
+              個人研究開発｜フルスタックエンジニア
             </Text>
-            <Box
-              mt="5"
-              mb="5"
-              display="flex"
-              flexDirection={{ base: "column", md: "row" }}
-              justifyContent={{
-                base: "center",
-                md: "space-around",
-              }}
-              alignItems={{
-                base: "center",
-                md: "space-around",
-              }}
-            >
-              <Box w={{ md: "45%" }} m="10">
-                <Text color="black" fontSize="2xl">
-                  期間：約半年の開発期間
-                </Text>
-                <Text color="black" fontSize="2xl">
-                  3名チーム
-                </Text>
-                <Text color="black" fontSize="lg">
-                  2022年に開催された高専プログラミングコンテスト競技部門で優勝し文部科学大臣賞受賞。
-                </Text>
-                <Text color="black" fontSize="lg">
-                  (使用技術 : C++,OpenSiv3D)
-                </Text>
-              </Box>
-              <Link
-                href="https://www.ct.omu.ac.jp/info/news/entry-16997.html"
-                _hover={{ textDecoration: "none", transform: "scale(1.1)" }}
-              >
-                <Box
-                  w="10rem"
-                  h="10rem"
-                  bg="rgba(10, 25, 47, 0.9)"
-                  color="white"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  borderRadius="10px"
-                  boxShadow="md"
-                  _hover={{ bg: "rgba(30, 45, 67, 0.9)", boxShadow: "lg" }}
-                >
-                  <Text p="3" fontSize="3xl" fontWeight="bold">
-                    More Detail
-                  </Text>
-                </Box>
-              </Link>
-            </Box>
-          </Box>
-        </Box>
-      </Flex>
-      {/* インターンシップ */}
-      <Flex
-        position="relative"
-        direction="column"
-        bg="orange.600"
-        color="navy.900"
-        alignItems="center"
-        justifyContent="center"
-        zIndex={1}
-        overflow="hidden"
-      >
-        {/* タイトル */}
-        <Box justifyContent="center" direction="column">
-          <Text
-            mt="5"
-            textAlign="center"
-            fontSize="4xl"
-            fontWeight="bold"
-            color="white"
-          >
-            Internship
-          </Text>
-          <Text
-            textAlign="center"
-            fontSize="md"
-            fontWeight="bold"
-            color="white"
-          >
-            - インターンシップ経験 ー
-          </Text>
-        </Box>
-        {/*　trusthub */}
-        <Box
-          bg="rgba(255, 240, 220, 1)"
-          margin={{ md: "10", base: "3" }}
-          mt={{ base: "10" }}
-          mb={{ base: "10" }}
-          justifyContent="center"
-          w={{ base: "auto", md: "80%" }}
-          borderRadius="20px"
-        >
-          <Box justifyContent="center" direction="column">
-            <Text
-              mt="3"
-              textAlign="center"
-              fontSize="4xl"
-              fontWeight="bold"
-              color="black"
-            >
-              1Month (Webエンジニア)
+            <Text fontSize="lg" color="black" mb="4">
+              <strong>期間：</strong>2025年8月 ～ 2025年12月
             </Text>
-          </Box>
-          <Box
-            mt="5"
-            mb="5"
-            display="flex"
-            flexDirection={{ base: "column", md: "row" }}
-            justifyContent={{
-              base: "center",
-              md: "sapce-between",
-            }}
-            alignItems={{
-              base: "center",
-              md: "sapce-betweenpace-around",
-            }}
-          >
-            <Box w={{ md: "45%" }} m="10">
-              <Text color="black" fontSize="2xl">
-                期間：1ヶ月
-              </Text>
-              <Text color="black" fontSize="lg">
-                約20名規模のエンジニアチームで機能の修正・新サービス開発を行なった。
-              </Text>
-            </Box>
-            <Flex
-              wrap="wrap"
-              w={{ md: "30%" }}
-              p={4}
-              justifyContent="center"
-              gap={4}
-            >
-              {trust.map((name, index) => {
-                const IconComp = iconByName[name];
-                if (!IconComp) return null;
-                return (
-                  <Flex
-                    key={index}
-                    w={{ base: "30%", md: "35%" }}
-                    h={{ base: "80px", md: "100px" }}
-                    overflow="hidden"
-                    borderRadius="10px"
-                    boxShadow="md"
-                    bg="white"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                  <Box fontSize={{ base: "2.5rem", md: "3rem" }} color={brandColorByName[name] ?? "black"}>
-                      <IconComp />
-                    </Box>
-                  </Flex>
-                );
-              })}
-            </Flex>
-          </Box>
-        </Box>
-        {/* office */}
-        <Box
-          bg="rgba(255, 240, 220, 1)"
-          margin={{ md: "10", base: "3" }}
-          mb={{ base: "10" }}
-          justifyContent="center"
-          w={{ base: "auto", md: "80%" }}
-          borderRadius="20px"
-        >
-          <Box justifyContent="center" direction="column">
-            <Text
-              mt="3"
-              textAlign="center"
-              fontSize="4xl"
-              fontWeight="bold"
-              color="black"
-            >
-              長期インターン (webエンジニア)
-            </Text>
-          </Box>
-          <Box
-            mt="5"
-            mb="5"
-            display="flex"
-            flexDirection={{ base: "column", md: "row" }}
-            justifyContent={{
-              base: "center",
-              md: "sapce-between",
-            }}
-            alignItems={{
-              base: "center",
-              md: "sapce-betweenpace-around",
-            }}
-          >
-            <Box w={{ md: "45%" }} m="10">
-              <Text color="black" fontSize="2xl">
-                期間：約1年半(継続中)
-              </Text>
-              <Text color="black" fontSize="2xl">
-                約10名規模のエンジニアチーム
-              </Text>
-              <Text color="black" fontSize="lg">
-                自社サイト・公開サイト・社内サービスの修正,新規開発
-              </Text>
-            </Box>
-            <Flex
-              wrap="wrap"
-              w={{ md: "30%" }}
-              p={4}
-              justifyContent="center"
-              gap={4}
-            >
-              {logos.map((name, index) => {
-                const IconComp = iconByName[name];
-                if (!IconComp) return null;
-                return (
-                  <Flex
-                    key={index}
-                    w={{ base: "30%", md: "35%" }}
-                    h={{ base: "80px", md: "100px" }}
-                    overflow="hidden"
-                    borderRadius="10px"
-                    boxShadow="md"
-                    bg="white"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                  <Box fontSize={{ base: "2.5rem", md: "3rem" }} color={brandColorByName[name] ?? "black"}>
-                      <IconComp />
-                    </Box>
-                  </Flex>
-                );
-              })}
-            </Flex>
-          </Box>
-        </Box>
 
-        {/* 抱月 */}
-        <Box
-          bg="rgba(255, 240, 220, 1)"
-          margin={{ md: "10", base: "3" }}
-          mb={{ base: "10" }}
-          justifyContent="center"
-          w={{ base: "auto", md: "80%" }}
-          borderRadius="20px"
-        >
-          <Box justifyContent="center" direction="column">
-            <Text
-              mt="3"
-              textAlign="center"
-              fontSize="4xl"
-              fontWeight="bold"
-              color="black"
-            >
-              1Week (海外工場実地,無給)
+            <Text fontSize="xl" fontWeight="bold" color="black" mb="2" mt="4">
+              概要
             </Text>
-          </Box>
-          <Box
-            mt="5"
-            mb="5"
-            display="flex"
-            flexDirection={{ base: "column", md: "row" }}
-            justifyContent={{
-              base: "center",
-              md: "sapce-between",
-            }}
-            alignItems={{
-              base: "center",
-              md: "sapce-betweenpace-around",
-            }}
-          >
-            <Box
-              mt="5"
-              mb="5"
-              display="flex"
-              flexDirection={{ base: "column", md: "row" }}
-              justifyContent={{
-                base: "center",
-                md: "space-between",
-              }}
-              alignItems={{
-                base: "center",
-                md: "space-between",
-              }}
-            >
-              <Box order={{ base: 2, md: 1 }} ml="10" w="80%">
-                <Text color="black" fontSize="2xl">
-                  期間：約1週間
-                </Text>
-                <Text color="black" fontSize="lg">
-                  ベトナムホーチミンの金属加工会社でのインターンシップを経験しました。
-                </Text>
-              </Box>
-            </Box>
+            <Text fontSize="md" color="black" mb="4" whiteSpace="pre-line">
+              個人研究として、Web・モバイル・組み込み・機械学習領域を横断した研究開発を実施。
+              アルゴリズム設計、ニューラルネットワーク設計、on-device学習、ロボット制御などを含む
+              複数プロジェクトを一貫して担当。
+            </Text>
           </Box>
         </Box>
       </Flex>
 
-      {/* 研究 */}
-      <Flex
-        position="relative"
-        direction="column"
-        bg="yellow.400"
-        color="navy.900"
-        alignItems="center"
-        justifyContent="center"
-        zIndex={1}
-        overflow="hidden"
-      >
-        {/* タイトル */}
-        <Box justifyContent="center" direction="column">
-          <Text mt="5" textAlign="center" fontSize="4xl" fontWeight="bold">
-            Research project
-          </Text>
-          <Text textAlign="center" fontSize="md" fontWeight="bold">
-            - 在学中の研究 ー
-          </Text>
-        </Box>
-        {/* 基礎研究 */}
-        <Box
-          bg="rgba(255, 240, 220, 1)"
-          margin={{ md: "10", base: "3" }}
-          justifyContent="center"
-          w={{ base: "auto", md: "80%" }}
-          borderRadius="20px"
-        >
-          <Box justifyContent="center" direction="column">
-            <Text
-              mt="3"
-              textAlign="center"
-              fontSize="4xl"
-              fontWeight="bold"
-              color="black"
-            >
-              Iotシステムの開発(高専4年)
-            </Text>
-          </Box>
-          <Box
-            mt="5"
-            mb="5"
-            display="flex"
-            flexDirection={{ base: "column", md: "row" }}
-            justifyContent={{
-              base: "center",
-              md: "sapce-between",
-            }}
-            alignItems={{
-              base: "center",
-              md: "sapce-betweenpace-around",
-            }}
-          >
-            <Box w={{ base: "90%", md: "45%" }} m="10">
-              <Text color="black" fontSize="2xl">
-                期間：約半年
-              </Text>
-              <Text color="black" fontSize="2xl">
-                約5名
-              </Text>
-              <Text color="black" fontSize="lg">
-                ソフトウェアと制御を全て開発し、
-              </Text>
-              <Text color="black" fontSize="lg">
-                ハードウェアの設計・制作はチームで分担して開発した。
-              </Text>
-              <Text color="black" fontSize="md">
-                Object
-                detectionの転移学習、座標の線形変換、クライアント・管理者用フロントエンド、各種ハードのapiと通信のバックエンドの実装を行なった。
-              </Text>
-            </Box>
-            <Flex
-              wrap="wrap"
-              w={{ md: "30%" }}
-              p={4}
-              justifyContent="center"
-              gap={4}
-            >
-              {basic.map((name, index) => {
-                const IconComp = iconByName[name];
-                if (!IconComp) return null;
-                return (
-                  <Flex
-                    key={index}
-                    w={{ base: "30%", md: "35%" }}
-                    h={{ base: "80px", md: "100px" }}
-                    overflow="hidden"
-                    borderRadius="10px"
-                    boxShadow="md"
-                    bg="white"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                  <Box fontSize={{ base: "2.5rem", md: "3rem" }} color={brandColorByName[name] ?? "black"}>
-                      <IconComp />
-                    </Box>
-                  </Flex>
-                );
-              })}
-            </Flex>
-          </Box>
-        </Box>
-        {/* 高専5年 研究 */}
-        <Box
-          bg="rgba(255, 240, 220, 1)"
-          margin={{ md: "10", base: "3" }}
-          justifyContent="center"
-          w={{ base: "auto", md: "80%" }}
-          borderRadius="20px"
-        >
-          <Box justifyContent="center" direction="column">
-            <Text
-              mt="3"
-              textAlign="center"
-              fontSize="4xl"
-              fontWeight="bold"
-              color="black"
-            >
-              オンデバイス学習によるHIアプリケーション(高専5年)
-            </Text>
-          </Box>
-          <Box
-            mt="5"
-            mb="5"
-            display="flex"
-            flexDirection={{ base: "column", md: "row" }}
-            justifyContent={{
-              base: "center",
-              md: "sapce-between",
-            }}
-            alignItems={{
-              base: "center",
-              md: "sapce-betweenpace-around",
-            }}
-          >
-          <Box w={{ base: "90%", md: "45%" }} m="10">
-              <Text color="black" fontSize="2xl">期間：開発中</Text>
-              <Text color="black" fontSize="lg">
-                自作したEMGセンサーデバイスから取得した筋電位データを用いて、
-                ニューラルネットワークで学習し、ヒューマンインタフェース（HI）
-                アプリケーションとして動作するネイティブアプリをFlutterで開発。
-              </Text>
-              <Text color="black" fontSize="lg" mt="2">
-                オンデバイス学習により個人差の大きいEMG信号の特性を克服するため、
-                端末上でパーソナライズ（個別再学習）を実施する仕組みを開発中。
-              </Text>
-            </Box>
-          <Flex
-            wrap="wrap"
-            w={{ md: "30%" }}
-            p={4}
-            justifyContent="center"
-            gap={4}
-          >
-            {emgTechs.map((name, index) => {
-              const IconComp = iconByName[name];
-              if (!IconComp) return null;
-              return (
-                <Flex
-                  key={index}
-                  w={{ base: "30%", md: "35%" }}
-                  h={{ base: "80px", md: "100px" }}
-                  overflow="hidden"
-                  borderRadius="10px"
-                  boxShadow="md"
-                  bg="white"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                <Box fontSize={{ base: "2.5rem", md: "3rem" }} color="black">
-                  <IconComp />
-                </Box>
-                </Flex>
-              );
-            })}
-          </Flex>
-          </Box>
-        </Box>
-      </Flex>
+      {/* 社内システム（外部委託）／LLM・Embedding活用パッケージ */}
+      <ProjectSection
+        title="社内システム（外部委託）／LLM・Embedding活用パッケージ"
+        period="2025年11月 ～ 2026年1月"
+        role="委託エンジニア（フルスタック）"
+        overview="外部委託案件として、既存社内システムの編集・閲覧機能を開発。
+OpenAI系LLMおよびEmbeddingを活用したパッケージプロダクトの機能開発も担当。"
+        devEnv={{
+          os: "Windows",
+          language: "TypeScript, C#",
+          fw: "Angular, ASP.NET, LangChain",
+        }}
+        roleAndScale={{
+          role: "フルスタックエンジニア",
+          scale: "3名",
+        }}
+        responsibilities={[
+          "フロントエンド実装",
+          "バックエンド実装",
+          "LLM・Embedding設計および実装",
+        ]}
+        bgColor="yellow.400"
+      />
+
       {/* 戻る */}
       <Box
         bg="orange.600"
@@ -613,7 +390,6 @@ const Home: React.FC = () => {
         zIndex={2}
         p="20"
       >
-        {/* ボタン */}
         <Button
           onClick={() => router.push("/")}
           w="80%"

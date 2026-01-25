@@ -152,6 +152,30 @@ const Home: React.FC = () => {
               w="60"
             ></Image>
           </Box>
+
+          {/* 自己紹介文 */}
+          <Box
+            mt="5"
+            mb="5"
+            px={{ base: "5", md: "10" }}
+            pb="5"
+          >
+            <Text
+              color="black"
+              fontSize={{ base: "md", md: "lg" }}
+              lineHeight="1.8"
+              whiteSpace="pre-line"
+            >
+              アルゴリズム競技において優勝経験を持ち、計算量や最適化を意識した実装力を強みとするフルスタックエンジニア。
+              Web・モバイル・組み込み領域を横断し、React / Flutter を用いたフロントエンド開発、
+              Laravel・ASP.NET・NestJS によるバックエンド設計、
+              MySQL / PostgreSQL を用いたDB設計、AWS・GCP・Azure・オンプレ環境での運用まで幅広く経験。
+              また、ニューラルネットワークの設計・学習を含む機械学習実装、ロボットアーム制御、画像認識、
+              on-device機械学習、OpenAI系LLM＋LangChainを用いたプロダクト開発にも携わり、
+              PoCに留まらない実装・運用まで一貫して対応。
+              要件理解から技術選定、実装・最適化まで主体的に推進できる点を強みとする。
+            </Text>
+          </Box>
         </Box>
       </Box>
 
